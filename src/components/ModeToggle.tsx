@@ -18,7 +18,6 @@ function ModeButton({
   Icon: typeof Pickaxe;
 }) {
   const mode = useGameStore((s) => s.mode);
-  console.log(mode, targetMode);
   const setMode = useGameStore((s) => s.setMode);
   const active = mode === targetMode;
   const progress = useSharedValue(0);
