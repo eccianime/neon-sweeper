@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — Neon Sweeper</title>
+    <meta
+      name="description"
+      content="Privacy Policy for Neon Sweeper, a cyberpunk minesweeper puzzle game."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Inter:wght@400;500;600&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #05010f;
+        --panel: rgba(10, 5, 25, 0.72);
+        --cyan: #00f0ff;
+        --pink: #ff2a6d;
+        --purple: #b026ff;
+        --yellow: #f9f871;
+        --text: #cfe9ff;
+        --text-dim: rgba(207, 233, 255, 0.62);
+        --border: rgba(0, 240, 255, 0.22);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-image:
+          radial-gradient(
+            circle at 15% 0%,
+            rgba(176, 38, 255, 0.16),
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 90% 15%,
+            rgba(0, 240, 255, 0.12),
+            transparent 45%
+          ),
+          linear-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 240, 255, 0.035) 1px, transparent 1px);
+        background-size:
+          auto,
+          auto,
+          34px 34px,
+          34px 34px;
+      }
+
+      .scanlines::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 5;
+        background: repeating-linear-gradient(
+          transparent 0 2px,
+          rgba(0, 0, 0, 0.12) 2px 4px
+        );
+        opacity: 0.35;
+      }
+
+      a {
+        color: var(--cyan);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 3px;
+      }
+
+      .font-display {
+        font-family: "Orbitron", sans-serif;
+      }
+      .mono {
+        font-family: "Share Tech Mono", monospace;
+      }
+
+      .glow-cyan {
+        text-shadow:
+          0 0 8px rgba(0, 240, 255, 0.7),
+          0 0 20px rgba(0, 240, 255, 0.35);
+      }
+      .glow-pink {
+        text-shadow:
+          0 0 8px rgba(255, 42, 109, 0.7),
+          0 0 20px rgba(255, 42, 109, 0.35);
+      }
+
+      header.hero {
+        position: relative;
+        padding: 72px 24px 56px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border: 1px solid var(--purple);
+        border-radius: 999px;
+        color: var(--purple);
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+      }
+
+      .badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--purple);
+        box-shadow: 0 0 8px var(--purple);
+      }
+
+      h1.title {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        margin: 0 0 10px;
+        color: var(--cyan);
+      }
+
+      h1.title span {
+        color: var(--pink);
+      }
+
+      .subtitle {
+        color: var(--text-dim);
+        font-size: 13px;
+        letter-spacing: 0.35em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .updated {
+        display: inline-block;
+        margin-top: 26px;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--panel);
+        font-size: 13px;
+        color: var(--text-dim);
+      }
+
+      .updated strong {
+        color: var(--yellow);
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 48px 24px 100px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      nav.toc {
+        position: sticky;
+        top: 24px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--panel);
+        padding: 18px;
+      }
+
+      nav.toc p.label {
+        font-size: 10px;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--purple);
+        margin: 0 0 12px;
+      }
+
+      nav.toc ol {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+
+      nav.toc a {
+        color: var(--text-dim);
+        font-size: 13px;
+        line-height: 1.4;
+        display: block;
+        transition: color 0.15s;
+      }
+
+      nav.toc a:hover {
+        color: var(--cyan);
+        text-decoration: none;
+      }
+
+      .content section {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--panel);
+        padding: 26px 28px;
+        margin-bottom: 20px;
+        scroll-margin-top: 24px;
+      }
+
+      .content h2 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 15px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin: 0 0 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .content h2 .num {
+        font-size: 12px;
+        color: var(--pink);
+        font-family: "Share Tech Mono", monospace;
+      }
+
+      .content p,
+      .content li {
+        font-size: 14.5px;
+        line-height: 1.75;
+        color: var(--text);
+        margin: 0 0 12px;
+      }
+
+      .content ul {
+        padding-left: 20px;
+        margin: 0 0 12px;
+      }
+      .content li {
+        margin-bottom: 6px;
+      }
+
+      .content strong {
+        color: var(--yellow);
+        font-weight: 600;
+      }
+
+      .placeholder {
+        color: var(--pink);
+        font-family: "Share Tech Mono", monospace;
+        font-size: 13.5px;
+      }
+
+      .contact-card {
+        display: grid;
+        gap: 10px;
+        margin-top: 8px;
+      }
+
+      .contact-row {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        align-items: baseline;
+      }
+
+      .contact-row .k {
+        min-width: 92px;
+        color: var(--purple);
+        font-family: "Share Tech Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px 24px 60px;
+        color: var(--text-dim);
+        font-size: 12px;
+        border-top: 1px solid var(--border);
+      }
+
+      footer .mono {
+        color: rgba(207, 233, 255, 0.4);
+        letter-spacing: 0.1em;
+      }
+
+      #back-to-top {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid var(--cyan);
+        background: var(--panel);
+        color: var(--cyan);
+        font-size: 16px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        backdrop-filter: blur(4px);
+      }
+
+      #back-to-top:hover {
+        background: var(--cyan);
+        color: var(--bg);
+      }
+
+      @media (max-width: 760px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        nav.toc {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body class="scanlines">
+    <header class="hero">
+      <div class="badge">Legal · Data Protection</div>
+      <h1 class="title font-display">NEON<span>SWEEPER</span></h1>
+      <p class="subtitle mono">// PRIVACY POLICY //</p>
+      <div class="updated mono">Last updated: <strong>13/07/2026</strong></div>
+    </header>
+
+    <main>
+      <div class="layout">
+        <nav class="toc" aria-label="Table of contents">
+          <p class="label">On this page</p>
+          <ol>
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#s1">1. Information We Collect</a></li>
+            <li><a href="#s2">2. Permissions Used</a></li>
+            <li><a href="#s3">3. Third-Party Services</a></li>
+            <li><a href="#s4">4. Children's Privacy</a></li>
+            <li><a href="#s5">5. Data Security</a></li>
+            <li><a href="#s6">6. Retention &amp; Deletion</a></li>
+            <li><a href="#s7">7. Your Rights</a></li>
+            <li><a href="#s8">8. Policy Changes</a></li>
+            <li><a href="#s9">9. Contact Us</a></li>
+          </ol>
+        </nav>
+
+        <div class="content">
+          <section id="intro">
+            <h2><span class="num">00</span> Introduction</h2>
+            <p>
+              Thank you for playing <strong>Neon Sweeper</strong> ("the App,"
+              "we," "us," or "our"). This Privacy Policy explains how we handle
+              information in connection with your use of the App. Your privacy
+              matters to us, and we've designed Neon Sweeper to collect as
+              little information as possible.
+            </p>
+            <p>
+              By downloading, installing, or using Neon Sweeper, you agree to
+              the terms of this Privacy Policy.
+            </p>
+          </section>
+
+          <section id="s1">
+            <h2><span class="num">01</span> Information We Collect</h2>
+            <p>
+              Neon Sweeper is an offline puzzle game. We do
+              <strong>not</strong> require you to create an account, log in, or
+              provide any personal information to play.
+            </p>
+            <p>
+              <strong>Information You Provide.</strong> We do not collect any
+              personally identifiable information (such as your name, email
+              address, or phone number) through the App.
+            </p>
+            <p>
+              <strong>Automatically Collected Information.</strong> The App
+              stores certain game settings and preferences
+              <strong>locally on your device only</strong>, including:
+            </p>
+            <ul>
+              <li>Selected difficulty level (Easy, Medium, Hard, or Custom)</li>
+              <li>Custom mine count preference</li>
+              <li>Sound effects (SFX) on/off setting</li>
+              <li>Music on/off setting</li>
+            </ul>
+            <p>
+              This data is stored using local device storage (AsyncStorage) and
+              is
+              <strong>never transmitted to us or to any third party</strong>. It
+              remains on your device and is used solely to remember your
+              preferences between play sessions. Uninstalling the App will
+              permanently delete this data.
+            </p>
+            <p>
+              <strong>Data We Do Not Collect.</strong> Neon Sweeper does
+              <strong>not</strong> collect, store, or transmit: personal
+              identification information, location data, contacts, photos or
+              media files, device identifiers used for tracking, usage analytics
+              or behavioral data, or advertising identifiers.
+            </p>
+          </section>
+
+          <section id="s2">
+            <h2><span class="num">02</span> Permissions Used by the App</h2>
+            <p>Neon Sweeper may request the following device permission:</p>
+            <ul>
+              <li>
+                <strong>Vibration/Haptics:</strong> used to provide tactile
+                feedback when digging cells, flagging mines, winning, or losing.
+                This permission does not involve data collection.
+              </li>
+            </ul>
+            <p>
+              The App does not request access to your camera, microphone,
+              contacts, location, storage of personal files, or any other
+              sensitive device permission.
+            </p>
+          </section>
+
+          <section id="s3">
+            <h2><span class="num">03</span> Third-Party Services</h2>
+            <p>
+              Neon Sweeper does <strong>not</strong> integrate any third-party
+              analytics, advertising networks, or tracking SDKs at this time. If
+              this changes in a future update, this Privacy Policy will be
+              updated accordingly, and the update will be reflected in the "Last
+              updated" date above.
+            </p>
+          </section>
+
+          <section id="s4">
+            <h2><span class="num">04</span> Children's Privacy</h2>
+            <p>
+              Neon Sweeper does not knowingly collect any personal information
+              from anyone, including children under the age of 13 (or the
+              applicable age of digital consent in your region). Since the App
+              does not collect personal information from any user, it may be
+              used by players of all ages in accordance with applicable app
+              store content ratings.
+            </p>
+            <p>
+              If you believe a child has provided us with personal information,
+              please contact us using the information below so we can address
+              the matter, though as noted, the App is not designed to collect
+              such information in the first place.
+            </p>
+          </section>
+
+          <section id="s5">
+            <h2><span class="num">05</span> Data Security</h2>
+            <p>
+              Because Neon Sweeper does not collect or transmit personal data to
+              external servers, there is no personal data at risk of being
+              exposed through our systems. Locally stored preferences remain on
+              your device and are subject to the security protections provided
+              by your device's operating system.
+            </p>
+          </section>
+
+          <section id="s6">
+            <h2><span class="num">06</span> Data Retention and Deletion</h2>
+            <p>
+              All game settings are stored locally on your device. You can
+              delete this data at any time by:
+            </p>
+            <ul>
+              <li>
+                Clearing the App's local storage/cache through your device
+                settings, or
+              </li>
+              <li>Uninstalling the App</li>
+            </ul>
+            <p>
+              Since we do not collect or store your data on our servers, there
+              is no additional data for us to delete on your behalf.
+            </p>
+          </section>
+
+          <section id="s7">
+            <h2><span class="num">07</span> Your Rights</h2>
+            <p>
+              Depending on your jurisdiction (including under regulations such
+              as the GDPR or CCPA), you may have rights regarding personal data,
+              including the right to access, correct, or delete it. Because Neon
+              Sweeper does not collect personal data, these rights are generally
+              not applicable to your use of the App. If you have questions about
+              how local device data is handled, please refer to Section 6 above.
+            </p>
+          </section>
+
+          <section id="s8">
+            <h2><span class="num">08</span> Changes to This Privacy Policy</h2>
+            <p>
+              We may update this Privacy Policy from time to time to reflect
+              changes in the App's functionality or for legal, regulatory, or
+              operational reasons. Any changes will be posted on this page with
+              an updated "Last updated" date. We encourage you to review this
+              Privacy Policy periodically.
+            </p>
+            <p>
+              Continued use of the App after any changes to this Privacy Policy
+              constitutes your acceptance of the revised policy.
+            </p>
+          </section>
+
+          <section id="s9">
+            <h2><span class="num">09</span> Contact Us</h2>
+            <p>
+              If you have any questions, concerns, or requests regarding this
+              Privacy Policy or the App, please contact us at:
+            </p>
+            <div class="contact-card mono">
+              <div class="contact-row">
+                <span class="k">Email</span
+                ><span class="placeholder">[Insert your support email]</span>
+              </div>
+              <div class="contact-row">
+                <span class="k">Developer</span
+                ><span class="placeholder">[Insert your name or company]</span>
+              </div>
+              <div class="contact-row">
+                <span class="k">Website</span
+                ><span class="placeholder">[Insert your website URL]</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p class="mono">
+        This Privacy Policy applies solely to the Neon Sweeper mobile
+        application and does not apply to any third-party websites, services, or
+        applications linked to or from within the App.
+      </p>
+    </footer>
+
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+      ↑
+    </button>
+
+    <script>
+      const btn = document.getElementById("back-to-top");
+      window.addEventListener("scroll", () => {
+        btn.style.display = window.scrollY > 400 ? "flex" : "none";
+      });
+      btn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>
