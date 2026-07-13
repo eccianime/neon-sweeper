@@ -1,50 +1,55 @@
-# Welcome to your Expo app 👋
+# Neon Sweeper — React Native (Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Conversión completa del buscaminas "NEON SWEEPER" (HTML/CSS/JS) a **React Native + NativeWind + Reanimated + Zustand**.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Instalación
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Requiere Expo SDK 51 (React Native 0.74). Si usas un proyecto Expo ya creado, copia las carpetas `app/`, `App.tsx`, `tailwind.config.js`, `babel.config.js`, `metro.config.js` y agrega las dependencias del `package.json`.
 
-## Learn more
+## Estructura
 
-To learn more about developing your project with Expo, look at the following resources:
+```
+app/
+  components/
+    Header.tsx          -> título con animación "flicker" (Reanimated)
+    DifficultyButtons.tsx-> selector EASY/MEDIUM/HARD
+    StatsBar.tsx         -> contador de minas, mute, reset, timer
+    Board.tsx            -> grilla responsive del tablero
+    Cell.tsx             -> celda individual (tap = cavar, long-press = bandera)
+    ModeToggle.tsx        -> selector de modo DIG/FLAG (para dispositivos sin long-press cómodo)
+    GameOverlay.tsx       -> pantalla de victoria/derrota
+  store/
+    gameStore.ts          -> TODA la lógica del juego en Zustand (tablero, minas, cascada, timer)
+  utils/
+    sound.ts              -> sintetizador de efectos de sonido (equivalente al Web Audio original) vía expo-av
+    haptics.ts             -> vibración/haptics (equivalente a navigator.vibrate)
+  theme/
+    colors.ts              -> paleta neón compartida
+  global.css               -> directivas de Tailwind requeridas por NativeWind v4
+App.tsx                    -> composición de pantalla + carga de fuentes (Orbitron / Share Tech Mono)
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Decisiones de la conversión
 
-## Join the community
+- **Estado global (Zustand)**: todo el estado mutable del juego original (tablero, minas, flags, timer, gameOver, modo, mute) vive en `useGameStore`. Los componentes se suscriben solo a lo que necesitan para minimizar renders.
+- **Animaciones (Reanimated)**:
+  - El "flicker" del título usa `withRepeat` + `withSequence` replicando los keyframes CSS (92%-94% de opacidad).
+  - Las celdas usan `withSpring` al presionar (equivalente a `.covered:active { transform: scale(0.9) }`).
+  - El overlay de victoria/derrota hace fade + scale al aparecer.
+  - Los botones de dificultad y modo animan su estado activo.
+- **Gestos**: el tap-para-cavar y long-press-para-bandera del original (350ms) se implementaron con `onPressIn`/`onPressOut` + `setTimeout`, igual que la lógica original de `pressTimer`.
+- **Sonido**: Web Audio API no existe en RN. Se sintetizan WAVs cortos en base64 en runtime (onda cuadrada / ruido) y se reproducen con `expo-av`, manteniendo el mismo carácter chiptune sin necesitar archivos de audio externos.
+- **Vibración**: se usa `Vibration.vibrate()` para patrones largos y `expo-haptics` para toques cortos (se siente más nativo).
+- **Fuentes**: Orbitron y Share Tech Mono se cargan vía `@expo-google-fonts`.
+- **Iconos**: `lucide-react-native` reemplaza a `lucide` (misma librería, versión RN).
+- **Layout responsive del tablero**: se mide el ancho del panel con `onLayout` y se calcula el tamaño de celda igual que `sizeGrid()` en el original.
 
-Join our community of developers creating universal apps.
+## Pendientes / mejoras opcionales
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Persistencia de `muted` (el original usaba `localStorage`) — se puede agregar con `@react-native-async-storage/async-storage` y el middleware `persist` de Zustand.
+- Scanlines / grid de fondo decorativo (`background-image` con gradientes) se omitió por simplicidad; se puede recrear con un `Svg` de fondo si se desea el detalle visual completo.
