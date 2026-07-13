@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Pressable } from "react-native";
 import Animated, {
-    interpolateColor,
-    useAnimatedStyle,
-    useSharedValue,
-    withTiming,
+  interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from "react-native-reanimated";
 
 interface Props {
@@ -18,10 +18,6 @@ const TRACK_HEIGHT = 28;
 const THUMB_SIZE = 22;
 const PADDING = 3;
 
-/**
- * Switch neón animado (equivalente a un <input type="checkbox"> estilizado
- * del original, pero con transición fluida de posición y color vía Reanimated).
- */
 export default function NeonSwitch({ value, onValueChange, disabled }: Props) {
   const progress = useSharedValue(value ? 1 : 0);
 

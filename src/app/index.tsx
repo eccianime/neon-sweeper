@@ -93,7 +93,7 @@ export default function SplashScreen() {
             onPress={() => router.push("/config")}
           />
           <NeonButton
-            label="CÓMO JUGAR"
+            label="HOW TO PLAY"
             Icon={HelpCircle}
             onPress={() => router.push("/help")}
           />

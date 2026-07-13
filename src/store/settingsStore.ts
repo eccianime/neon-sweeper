@@ -4,7 +4,6 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 export type DifficultyOption = "easy" | "medium" | "hard" | "custom";
 
-/** Grilla usada cuando el jugador elige dificultad "custom" */
 export const CUSTOM_GRID = { cols: 12, rows: 15 };
 export const CUSTOM_MIN_MINES = 10;
 export const CUSTOM_MAX_MINES = Math.floor(

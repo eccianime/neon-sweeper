@@ -1,9 +1,9 @@
 import type { LucideIcon } from "lucide-react-native";
 import { Pressable, Text, ViewStyle } from "react-native";
 import Animated, {
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
 } from "react-native-reanimated";
 
 interface Props {
@@ -14,10 +14,6 @@ interface Props {
   style?: ViewStyle;
 }
 
-/**
- * Botón grande estilo neón para pantallas de menú (Start / Config / Help).
- * Anima un leve "press-scale" con Reanimated, igual que las celdas del tablero.
- */
 export default function NeonButton({
   label,
   onPress,

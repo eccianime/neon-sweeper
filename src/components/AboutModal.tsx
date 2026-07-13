@@ -15,8 +15,8 @@ interface Props {
 
 const AUTHOR = {
   name: "Jean Paul Rojas Véliz",
-  role: "Desarrollador / Diseñador Mobile",
-  bio: "Creador de Neon Sweeper, un buscaminas con estética cyberpunk hecho con React Native.",
+  role: "Developer / Mobile Designer",
+  bio: "Creator of Neon Sweeper, a cyberpunk-style minesweeper built with React Native.",
   email: "ingjeanpaulrojas@gmail.com",
   github: "https://github.com/eccianime",
   website: "https://eccianime.github.io",
@@ -42,7 +42,7 @@ export default function AboutModal({ visible, onClose }: Props) {
                 textShadowOffset: { width: 0, height: 0 },
               }}
             >
-              SOBRE MÍ
+              ABOUT ME
             </Text>
             <Pressable
               onPress={onClose}

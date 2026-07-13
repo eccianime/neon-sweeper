@@ -70,7 +70,7 @@ export default function HelpScreen() {
             textShadowOffset: { width: 0, height: 0 },
           }}
         >
-          CÓMO JUGAR
+          HOW TO PLAY
         </Text>
       </View>
 
@@ -80,44 +80,38 @@ export default function HelpScreen() {
         showsVerticalScrollIndicator={false}
       >
         <Text className="font-mono text-xl text-neonCyan/50 mb-6 tracking-widest text-center">
-          OBJETIVO: DESPEJA TODA LA GRILLA SIN DETONAR NINGUNA MINA
+          OBJECTIVE: CLEAR THE ENTIRE GRID WITHOUT DETONATING ANY MINE
         </Text>
 
-        <HelpItem Icon={Pickaxe} iconColor="#00f0ff" title="CAVAR (DIG)">
-          Toca una celda para revelarla. Si está vacía, se abrirá
-          automáticamente un área de celdas seguras a su alrededor (efecto
-          cascada). Si tiene un número, indica cuántas minas hay en las 8 celdas
-          vecinas.
+        <HelpItem Icon={Pickaxe} iconColor="#00f0ff" title="DIG">
+          Tap a cell to reveal it. If it is empty, a safe area of cells around
+          it opens automatically (cascade effect). If it shows a number, it
+          tells how many mines are in the 8 neighboring cells.
         </HelpItem>
 
-        <HelpItem
-          Icon={FlagTriangleRight}
-          iconColor="#f9f871"
-          title="MARCAR (FLAG)"
-        >
-          Mantén presionada una celda (o activa el modo FLAG y tócala) para
-          marcarla con una bandera cuando sospeches que hay una mina. Una celda
-          marcada no se puede cavar hasta que quites la bandera.
+        <HelpItem Icon={FlagTriangleRight} iconColor="#f9f871" title="FLAG">
+          Long-press a cell (or enable FLAG mode and tap it) to mark it with a
+          flag when you suspect a mine. A flagged cell cannot be dug until you
+          remove the flag.
         </HelpItem>
 
-        <HelpItem Icon={Bomb} iconColor="#ff2a6d" title="PRIMER TOQUE SEGURO">
-          Tu primer clic nunca detona una mina: el juego coloca las minas
-          después de tu primer toque, dejando siempre esa celda y sus vecinas
-          despejadas.
+        <HelpItem Icon={Bomb} iconColor="#ff2a6d" title="SAFE FIRST TAP">
+          Your first tap never detonates a mine: the game places mines after
+          your first tap, always leaving that cell and its neighbors clear.
         </HelpItem>
 
-        <HelpItem Icon={ShieldCheck} iconColor="#67e8f9" title="CÓMO GANAR">
-          Ganas cuando revelas todas las celdas que no contienen minas. El
-          cronómetro se detiene y las minas restantes se marcan automáticamente.
+        <HelpItem Icon={ShieldCheck} iconColor="#67e8f9" title="HOW TO WIN">
+          You win when you reveal all cells that do not contain mines. The timer
+          stops and the remaining mines are flagged automatically.
         </HelpItem>
 
-        <HelpItem Icon={Skull} iconColor="#ec4899" title="CÓMO PERDER">
-          Si cavas una celda con una mina, esta detona y pierdes la partida. Se
-          revelará todo el campo minado para que veas dónde estaban.
+        <HelpItem Icon={Skull} iconColor="#ec4899" title="HOW TO LOSE">
+          If you dig a cell with a mine, it detonates and you lose the game. The
+          entire minefield is revealed so you can see where they were.
         </HelpItem>
 
         <Text className="font-mono text-lg text-neonCyan/40 mt-2 tracking-widest text-center">
-          TAP = CAVAR · LONG-PRESS = BANDERA
+          TAP = DIG · LONG-PRESS = FLAG
         </Text>
       </ScrollView>
     </ImageBackground>

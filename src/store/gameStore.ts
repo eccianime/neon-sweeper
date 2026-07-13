@@ -13,9 +13,7 @@ export interface Cell {
   revealed: boolean;
   flag: boolean;
   adj: number;
-  /** Marca especial cuando fue la mina que hizo perder */
   exploded?: boolean;
-  /** Bandera incorrecta mostrada al perder */
   wrongFlag?: boolean;
 }
 
@@ -49,7 +47,6 @@ interface GameState {
   tickTimer: () => void;
 }
 
-/** Resuelve cols/rows/mines actuales según la configuración guardada por el usuario */
 function resolveConfig(): { cols: number; rows: number; mines: number } {
   const { difficulty, customMines } = useSettingsStore.getState();
   if (difficulty === "custom") {

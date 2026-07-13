@@ -93,7 +93,7 @@ function CustomMinesInput() {
   return (
     <View className="rounded-lg px-4 py-3 bg-[rgba(10,5,25,0.72)] border border-neonPurple/40 mt-3">
       <Text className="font-mono text-base text-neonCyan/70 mb-2">
-        Cantidad de minas (grilla 12 x 15) — mínimo {CUSTOM_MIN_MINES}, máximo{" "}
+        Number of mines (12 x 15 grid) — minimum {CUSTOM_MIN_MINES}, maximum{" "}
         {CUSTOM_MAX_MINES}
       </Text>
       <TextInput
@@ -188,18 +188,18 @@ export default function ConfigScreen() {
           <SectionLabel>AUDIO</SectionLabel>
           <ToggleRow
             Icon={Volume2}
-            label="Efectos de sonido (SFX)"
+            label="Sound effects (SFX)"
             value={sfxEnabled}
             onValueChange={setSfxEnabled}
           />
           <ToggleRow
             Icon={Music}
-            label="Música (próximamente)"
+            label="Music (coming soon)"
             value={musicEnabled}
             onValueChange={setMusicEnabled}
           />
 
-          <SectionLabel>INFORMACIÓN</SectionLabel>
+          <SectionLabel>INFO</SectionLabel>
           <Pressable
             onPress={() => setAboutVisible(true)}
             className="flex-row items-center justify-between rounded-lg px-4 py-3 bg-[rgba(10,5,25,0.72)] border border-neonCyan/25"
