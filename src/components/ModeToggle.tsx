@@ -64,7 +64,7 @@ export default function ModeToggle() {
         <ModeButton targetMode="dig" label="DIG" Icon={Pickaxe} />
         <ModeButton targetMode="flag" label="FLAG" Icon={FlagTriangleRight} />
       </View>
-      <Text className="text-center text-[10px] text-neonCyan/40 mt-2 tracking-widest font-mono">
+      <Text className="mt-6 text-center text-lg text-neonCyan/40 tracking-widest font-mono">
         TAP TO DIG · LONG-PRESS TO FLAG
       </Text>
     </View>

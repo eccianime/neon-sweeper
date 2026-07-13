@@ -2,9 +2,9 @@ import { ShieldCheck, Skull } from "lucide-react-native";
 import React, { useEffect } from "react";
 import { Pressable, Text, View } from "react-native";
 import Animated, {
-    useAnimatedStyle,
-    useSharedValue,
-    withTiming,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from "react-native-reanimated";
 import { useGameStore } from "../store/gameStore";
 
@@ -60,7 +60,7 @@ export default function GameOverlay() {
       </View>
 
       <Text
-        className={`font-display text-2xl font-black tracking-widest ${
+        className={`font-display text-3xl font-black tracking-widest text-center ${
           win ? "text-neonCyan" : "text-neonPink"
         }`}
         style={{
@@ -72,17 +72,17 @@ export default function GameOverlay() {
         {win ? "GRID SECURED" : "SYSTEM BREACH"}
       </Text>
 
-      <Text className="text-xs text-neonCyan/70 mt-2 mb-5 text-center font-mono">
+      <Text className="text-lg text-neonCyan/70 mt-2 mb-5 text-center font-mono">
         {win
-          ? `All mines defused in ${timer}s. System restored.`
-          : "A mine detonated. The grid is lost."}
+          ? `All mines defused in ${timer}s.\nSystem restored.`
+          : "A mine detonated.\nThe grid is lost."}
       </Text>
 
       <Pressable
         onPress={newGame}
         className="border border-neonCyan rounded px-6 py-2 bg-[rgba(10,5,25,0.72)]"
       >
-        <Text className="font-display tracking-widest text-sm text-neonCyan">
+        <Text className="font-display tracking-widest text-lg text-neonCyan">
           PLAY AGAIN
         </Text>
       </Pressable>

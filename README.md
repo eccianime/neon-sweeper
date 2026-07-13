@@ -15,24 +15,48 @@ Requiere Expo SDK 51 (React Native 0.74). Si usas un proyecto Expo ya creado, co
 
 ```
 app/
+  screens/
+    SplashScreen.tsx      -> menú principal: START GAME / CONFIG / HELP
+    ConfigScreen.tsx      -> dificultad (easy/medium/hard/custom + minas), SFX, música, About
+    HelpScreen.tsx        -> instrucciones de cómo jugar
+    GameScreen.tsx         -> pantalla de juego (header, stats, tablero, mode toggle)
   components/
-    Header.tsx          -> título con animación "flicker" (Reanimated)
-    DifficultyButtons.tsx-> selector EASY/MEDIUM/HARD
-    StatsBar.tsx         -> contador de minas, mute, reset, timer
-    Board.tsx            -> grilla responsive del tablero
-    Cell.tsx             -> celda individual (tap = cavar, long-press = bandera)
-    ModeToggle.tsx        -> selector de modo DIG/FLAG (para dispositivos sin long-press cómodo)
-    GameOverlay.tsx       -> pantalla de victoria/derrota
+    Header.tsx            -> título con animación "flicker" (Reanimated)
+    StatsBar.tsx           -> contador de minas, mute (sfx), reset, timer
+    Board.tsx              -> grilla responsive del tablero
+    Cell.tsx               -> celda individual (tap = cavar, long-press = bandera)
+    ModeToggle.tsx          -> selector de modo DIG/FLAG (para dispositivos sin long-press cómodo)
+    GameOverlay.tsx         -> pantalla de victoria/derrota
+    NeonButton.tsx          -> botón grande reutilizable (splash/config/help)
+    NeonSwitch.tsx          -> switch animado reutilizable (config)
+    AboutModal.tsx          -> modal con información personal (⚠️ editar datos placeholder)
   store/
-    gameStore.ts          -> TODA la lógica del juego en Zustand (tablero, minas, cascada, timer)
+    navStore.ts             -> navegación simple entre pantallas (splash/config/help/game)
+    settingsStore.ts         -> configuración persistente (AsyncStorage): dificultad, minas custom, sfx, música
+    gameStore.ts              -> TODA la lógica del juego en Zustand (tablero, minas, cascada, timer);
+                                 lee la config activa desde settingsStore al iniciar partida
   utils/
-    sound.ts              -> sintetizador de efectos de sonido (equivalente al Web Audio original) vía expo-av
-    haptics.ts             -> vibración/haptics (equivalente a navigator.vibrate)
+    sound.ts                  -> sintetizador de efectos de sonido (equivalente al Web Audio original) vía expo-av;
+                                 respeta el toggle de SFX de settingsStore
+    haptics.ts                 -> vibración/haptics (equivalente a navigator.vibrate)
   theme/
-    colors.ts              -> paleta neón compartida
-  global.css               -> directivas de Tailwind requeridas por NativeWind v4
-App.tsx                    -> composición de pantalla + carga de fuentes (Orbitron / Share Tech Mono)
+    colors.ts                  -> paleta neón compartida
+  global.css                   -> directivas de Tailwind requeridas por NativeWind v4
+App.tsx                        -> enrutador de pantallas + carga de fuentes (Orbitron / Share Tech Mono)
 ```
+
+## Pantallas nuevas
+
+- **Splash**: tres botones — _Start Game_ (inicia partida con la config guardada), _Config_ y _Help_.
+- **Config**:
+  - Selector de dificultad EASY / MEDIUM / HARD / CUSTOM.
+  - Al elegir **CUSTOM** aparece un campo numérico para la cantidad de minas, acotado entre `CUSTOM_MIN_MINES` (10) y `CUSTOM_MAX_MINES` (63, ~35% de una grilla fija de 12×15) — se recorta automáticamente al perder el foco.
+  - Toggle de **SFX** (ligado también al botón de mute dentro del juego).
+  - Toggle de **Música** (placeholder listo para conectar cuando agregues las pistas — no reproduce nada todavía).
+  - Botón **About** que abre un modal con tu información personal — _edita los datos en `AboutModal.tsx`, están marcados con un comentario ⚠️_.
+- **Help**: explica objetivo, cavar, marcar banderas, la regla de "primer toque seguro", y condiciones de victoria/derrota.
+
+Toda la configuración (dificultad, minas custom, sfx, música) se persiste con `zustand/middleware persist` + `AsyncStorage`, así que sobrevive a que cierres la app.
 
 ## Decisiones de la conversión
 

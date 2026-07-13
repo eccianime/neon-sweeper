@@ -1,23 +1,11 @@
-/**
- * Motor de sonido simplificado para React Native usando expo-av.
- *
- * El original usaba Web Audio API para sintetizar tonos en tiempo real
- * (osciladores, ruido blanco, etc). React Native no tiene Web Audio, así
- * que aquí generamos los mismos efectos como archivos WAV base64 cortos
- * generados en runtime (síntesis simple de onda cuadrada/ruido) y los
- * reproducimos con expo-av. Esto mantiene el mismo carácter "chiptune/neón"
- * del juego original sin depender de assets externos.
- */
 import { Audio } from "expo-av";
+import { useSettingsStore } from "../store/settingsStore";
 
-let muted = false;
-
-export function setMuted(value: boolean) {
-  muted = value;
+function isSfxEnabled() {
+  return useSettingsStore.getState().sfxEnabled;
 }
 
 function base64FromBytes(bytes: Uint8Array): string {
-  // Codificación base64 manual (evita dependencias extra en RN)
   const chars =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
   let result = "";
@@ -85,7 +73,7 @@ async function playTone(
   durationMs: number,
   kind: "square" | "noise" = "square",
 ) {
-  if (muted) return;
+  if (!isSfxEnabled()) return;
   try {
     const uri = makeWavTone(freq, durationMs, kind);
     const { sound } = await Audio.Sound.createAsync({ uri });
@@ -101,7 +89,7 @@ async function playTone(
 }
 
 export async function playSfx(kind: "dig" | "flag" | "win" | "lose") {
-  if (muted) return;
+  if (!isSfxEnabled()) return;
   switch (kind) {
     case "dig":
       playTone(660, 90, "square");

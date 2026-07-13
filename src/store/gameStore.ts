@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { vibrate } from "../utils/haptics";
 import { playSfx } from "../utils/sound";
+import { CUSTOM_GRID, useSettingsStore } from "./settingsStore";
 
 export type Difficulty = "easy" | "medium" | "hard";
 export type Mode = "dig" | "flag";
@@ -26,7 +27,6 @@ const DIFFS: Record<Difficulty, { cols: number; rows: number; mines: number }> =
   };
 
 interface GameState {
-  diff: Difficulty;
   cols: number;
   rows: number;
   mines: number;
@@ -38,18 +38,28 @@ interface GameState {
   revealedCount: number;
   timer: number;
   mode: Mode;
-  muted: boolean;
   overlayVisible: boolean;
   // control interno del timer
   _timerHandle: ReturnType<typeof setInterval> | null;
 
-  setDifficulty: (d: Difficulty) => void;
   setMode: (m: Mode) => void;
-  toggleMute: () => void;
   newGame: () => void;
   digCell: (r: number, c: number) => void;
   toggleFlag: (r: number, c: number) => void;
   tickTimer: () => void;
+}
+
+/** Resuelve cols/rows/mines actuales según la configuración guardada por el usuario */
+function resolveConfig(): { cols: number; rows: number; mines: number } {
+  const { difficulty, customMines } = useSettingsStore.getState();
+  if (difficulty === "custom") {
+    return {
+      cols: CUSTOM_GRID.cols,
+      rows: CUSTOM_GRID.rows,
+      mines: customMines,
+    };
+  }
+  return DIFFS[difficulty];
 }
 
 function forEachNeighbor(
@@ -141,7 +151,6 @@ function revealCascade(
 }
 
 export const useGameStore = create<GameState>((set, get) => ({
-  diff: "easy",
   cols: DIFFS.easy.cols,
   rows: DIFFS.easy.rows,
   mines: DIFFS.easy.mines,
@@ -153,22 +162,13 @@ export const useGameStore = create<GameState>((set, get) => ({
   revealedCount: 0,
   timer: 0,
   mode: "dig",
-  muted: false,
   overlayVisible: false,
   _timerHandle: null,
 
-  setDifficulty: (d) => {
-    set({ diff: d });
-    get().newGame();
-  },
-
   setMode: (m) => set({ mode: m }),
 
-  toggleMute: () => set((s) => ({ muted: !s.muted })),
-
   newGame: () => {
-    const { diff } = get();
-    const cfg = DIFFS[diff];
+    const cfg = resolveConfig();
     const handle = get()._timerHandle;
     if (handle) clearInterval(handle);
     set({

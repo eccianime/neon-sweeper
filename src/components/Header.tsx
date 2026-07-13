@@ -29,7 +29,7 @@ export default function Header() {
   }));
 
   return (
-    <View className="items-center mb-3">
+    <View className="items-center mb-6">
       <Animated.Text
         style={[
           animatedStyle,
@@ -54,7 +54,7 @@ export default function Header() {
         </Text>
       </Animated.Text>
 
-      <Text className="text-[10px] tracking-[3px] text-neonCyan/60 mt-1 font-mono">
+      <Text className="text-lg tracking-[3px] text-neonCyan/60 mt-1 font-mono">
         {"// DEFUSE THE GRID //"}
       </Text>
     </View>
