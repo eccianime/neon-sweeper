@@ -12,21 +12,23 @@ export default function GameScreen() {
     <ImageBackground
       source={BackgroundBlur}
       resizeMode="cover"
-      className="flex-1 w-full max-w-md self-center py-safe px-4 bg-bgDeep"
+      className="flex-1 w-full self-center py-safe px-4 bg-bgDeep"
     >
-      <View className="flex-row items-center mb-1">
-        <Pressable
-          onPress={router.back}
-          className="size-12 rounded-full items-center justify-center border border-neonCyan/40"
-        >
-          <ArrowLeft size={24} color="#00f0ff" />
-        </Pressable>
-      </View>
-      <Header />
-      <StatsBar />
-      <Board />
-      <View className="mt-auto">
-        <ModeToggle />
+      <View className="max-w-md">
+        <View className="flex-row items-center mb-1">
+          <Pressable
+            onPress={router.back}
+            className="size-12 rounded-full items-center justify-center border border-neonCyan/40"
+          >
+            <ArrowLeft size={24} color="#00f0ff" />
+          </Pressable>
+        </View>
+        <Header />
+        <StatsBar />
+        <Board />
+        <View className="mt-auto">
+          <ModeToggle />
+        </View>
       </View>
     </ImageBackground>
   );
